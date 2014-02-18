@@ -13,7 +13,18 @@ class User < Sequel::Model
 
   def password=(new_password)
     self[:password] = Password.create(new_password)
-    puts self[:password]
+  end
+
+  def username=(new_username)
+    self[:username] = new_username
+  end
+
+  def email=(new_email)
+    self[:email] = new_email
+  end
+
+  def retypePassword=(new_retypePassword)
+    self[:retypePassword] = new_retypePassword
   end
 
   #TODO SEND MAIL
@@ -21,7 +32,7 @@ class User < Sequel::Model
   def validate_data
     super
 
-    validates_presence [:username, :password, :email]
+    validates_presence [:username, :password, :email, :retypePassword]
     validates_unique [:username, :password]
     validates_format(email_regex, :email)
     validates_length_range(4...20, :username)

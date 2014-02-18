@@ -29,6 +29,17 @@ get '/register' do
   haml :register
 end
 
+post '/register' do
+  user = User.create(params)
+  if user.valid?
+      user.save
+      redirect '/'
+  else
+    p "registration failed"
+    redirect '/register'
+  end
+end
+
 get '/notes' do
   haml :notes
 end
