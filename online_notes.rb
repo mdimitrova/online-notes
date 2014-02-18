@@ -16,7 +16,6 @@ end
 
 post '/login' do
   user = User.authenticate(params[:username], params[:password])
-  p "USER #{user}"
   if user
     session[:user] = user
     redirect '/'
@@ -43,7 +42,8 @@ get '/tags' do
 end
 
 get '/logout' do
-  haml :logout
+  session.delete :user
+  redirect '/'
 end
 
 not_found do
