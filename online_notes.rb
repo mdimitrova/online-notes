@@ -17,6 +17,22 @@ get '/register' do
   haml :register
 end
 
+get '/notes' do
+  haml :notes
+end
+
+get '/notebooks' do
+  haml :notebooks
+end
+
+get '/tags' do
+  haml :tags
+end
+
+get '/logout' do
+  haml :logout
+end
+
 not_found do
   haml :not_found
 end
