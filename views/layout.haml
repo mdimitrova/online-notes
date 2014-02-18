@@ -2,8 +2,8 @@
 %html
   %head
     %meta(charset="utf-8")
-    %title= @title
+    %title= "Online notes"
     %link(href="/css/bootstrap.css" rel="stylesheet" media="screen")
   %body
-    = user_logged? (haml :navbar_logged_in) : (haml :navbar_logged_out)
+    = session[:user] ? (haml :logged_in_navigation) : (haml :logged_out_navigation)
     = yield

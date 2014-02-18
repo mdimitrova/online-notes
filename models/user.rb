@@ -13,12 +13,13 @@ class User < Sequel::Model
 
   def password=(new_password)
     self[:password] = Password.create(new_password)
+    puts self[:password]
   end
 
   #TODO SEND MAIL
 
   def validate_data
-    #super
+    super
 
     validates_presence [:username, :password, :email]
     validates_unique [:username, :password]
@@ -28,4 +29,6 @@ class User < Sequel::Model
 
     email_regex = '/\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/'
   end
+
+  #TODO AUTHENTICATE
 end
