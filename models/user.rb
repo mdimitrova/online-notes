@@ -30,5 +30,8 @@ class User < Sequel::Model
     email_regex = '/\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/'
   end
 
-  #TODO AUTHENTICATE
+  def self.authenticate(username, password)
+    user = User.find(:username => username)
+    return user if user.password == password
+  end
 end

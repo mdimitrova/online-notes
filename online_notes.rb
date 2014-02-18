@@ -2,6 +2,7 @@ require 'sinatra'
 
 enable :sessions
 enable :logging
+set :session_secret, 'super secret'
 
 Dir.glob('./{models}/*.rb').each { |file| require file }
 
@@ -11,6 +12,18 @@ end
 
 get '/login' do
   haml :login
+end
+
+post '/login' do
+  user = User.authenticate(params[:username], params[:password])
+  p "USER #{user}"
+  if user
+    session[:user] = user
+    redirect '/'
+  else
+    haml :login, locals: {:authentication_error => true}
+    redirect '/login'
+  end
 end
 
 get '/register' do
