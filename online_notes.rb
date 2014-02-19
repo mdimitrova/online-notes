@@ -31,11 +31,12 @@ end
 
 post '/register' do
   user = User.create(params)
-  if user.valid?
+  if user.valid? #FIXME
       user.save
+      session[:user] = user
       redirect '/'
   else
-    p "registration failed"
+    haml :login, locals: {:authentication_error => true}
     redirect '/register'
   end
 end
@@ -60,4 +61,3 @@ end
 not_found do
   haml :not_found
 end
-

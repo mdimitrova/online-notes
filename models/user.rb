@@ -11,38 +11,35 @@ class User < Sequel::Model
     Password.new(self[:password])
   end
 
-  def password=(new_password)
-    self[:password] = Password.create(new_password)
+  def password=(input_password)
+    self[:password] = Password.create(input_password)
   end
 
-  def username=(new_username)
-    self[:username] = new_username
+  def username=(input_username)
+    self[:username] = input_username
   end
 
-  def email=(new_email)
-    self[:email] = new_email
+  def email=(input_email)
+    self[:email] = input_email
   end
 
   def retypePassword=(new_retypePassword)
-    self[:retypePassword] = new_retypePassword
+
   end
 
-  #TODO SEND MAIL
-
-  def validate_data
+  def validate
     super
 
-    validates_presence [:username, :password, :email, :retypePassword]
+    email_regex = /\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
+    validates_presence [:username, :password, :email]
     validates_unique [:username, :password]
     validates_format(email_regex, :email)
     validates_length_range(4...20, :username)
     validates_min_length(6, :password)
-
-    email_regex = '/\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/'
   end
 
   def self.authenticate(username, password)
     user = User.find(:username => username)
-    return user if user.password == password
+    return user if user and user.password == password
   end
 end

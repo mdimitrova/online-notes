@@ -1,7 +1,8 @@
 .text-center
   %h1 Register page
 
-  = #TODO error message
+  = if locals[:register_error] #FIXME
+    %p.spacer Incorrect register data. Try again
 
   %form.horizontal{ method: "post", role: "form"}
     .form-group
@@ -16,4 +17,4 @@
     .form-group
       %label{ for: "retypePassword" } Retype password:
       %input.form-control{ id: "retypePassword", type: "password", name: "retypePassword" }
-    %button.btn.btn-default{ type: "submit" } Register
+    %button.btn{ type: "submit" } Register
