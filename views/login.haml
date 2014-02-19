@@ -1,8 +1,7 @@
 .text-center
   %h1 Login page
 
-  = if locals[:authentication_error] #FIXME
-    %p.spacer Incorrect login data. Try again
+  %p.spacer= "#{locals[:authentication_error]}"
 
   %form.horizontal{ method: "post", role: "form"}
     .form-group

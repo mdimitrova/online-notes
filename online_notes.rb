@@ -20,8 +20,8 @@ post '/login' do
     session[:user] = user
     redirect "/user/#{params[:username]}"
   else
-    haml :login, locals: {:authentication_error => true}
-    redirect '/login'
+    haml :login, locals: {:authentication_error => "Incorrect login data. Try again"}
+    #redirect '/login'
   end
 end
 
@@ -36,7 +36,7 @@ post '/register' do
     session[:user] = user
     redirect "/user/#{params[:username]}"
   else
-    haml :login, locals: {:authentication_error => true}
+    haml :login
     redirect '/register'
   end
 end
