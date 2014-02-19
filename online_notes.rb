@@ -42,7 +42,12 @@ post '/register' do
 end
 
 get '/user/:username' do
-  haml :home, locals: {:welcome_message => "Welcome back, #{params[:username]}!", :username => params[:username]}
+  current_user = params[:username]
+  if session[current_user]
+    haml :home, locals: {:welcome_message => "Welcome back, #{params[:username]}!", :username => params[:username]}
+  else
+    redirect '/'
+  end
 end
 
 get '/notes' do
