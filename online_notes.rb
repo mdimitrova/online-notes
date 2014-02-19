@@ -7,7 +7,7 @@ set :session_secret, 'super secret'
 Dir.glob('./{models}/*.rb').each { |file| require file }
 
 get '/' do
-  haml :home, locals: {:message => "Welcome to Online notes :)"}
+  haml :home, locals: {:welcome_message => "Welcome to Online notes :)"}
 end
 
 get '/login' do
@@ -18,8 +18,7 @@ post '/login' do
   user = User.authenticate(params[:username], params[:password])
   if user
     session[:user] = user
-    user_address = '/user/'.concat(params[:username])
-    redirect user_address
+    redirect "/user/#{params[:username]}"
   else
     haml :login, locals: {:authentication_error => true}
     redirect '/login'
@@ -35,8 +34,7 @@ post '/register' do
   if user.valid? #FIXME
     user.save
     session[:user] = user
-    user_address = '/user/'.concat(params[:username])
-    redirect user_address
+    redirect "/user/#{params[:username]}"
   else
     haml :login, locals: {:authentication_error => true}
     redirect '/register'
@@ -44,7 +42,7 @@ post '/register' do
 end
 
 get '/user/:username' do
-  haml :home, locals: {:welcome_message => "Welcome back, #{params[:username]}!"}
+  haml :home, locals: {:welcome_message => "Welcome back, #{params[:username]}!", :username => params[:username]}
 end
 
 get '/notes' do
