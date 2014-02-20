@@ -18,10 +18,9 @@ post '/login' do
   user = User.authenticate(params[:username], params[:password])
   if user
     session[:user] = user
-    redirect "/user/#{params[:username]}"
+    redirect "/notes"
   else
     haml :login, locals: {:authentication_error => "Incorrect login data. Try again"}
-    #redirect '/login'
   end
 end
 
@@ -34,19 +33,10 @@ post '/register' do
   if user.valid? #FIXME
     user.save
     session[:user] = user
-    redirect "/user/#{params[:username]}"
+    redirect "/notes"
   else
     haml :login
     redirect '/register'
-  end
-end
-
-get '/user/:username' do
-  current_user = params[:username]
-  if session[current_user]
-    haml :home, locals: {:welcome_message => "Welcome back, #{params[:username]}!", :username => params[:username]}
-  else
-    redirect '/'
   end
 end
 
