@@ -24,7 +24,7 @@ class User < Sequel::Model
   end
 
   def retypePassword=(new_retypePassword)
-
+    #TODO
   end
 
   def validate

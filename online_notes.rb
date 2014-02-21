@@ -41,7 +41,7 @@ post '/register' do
 end
 
 get '/notes' do
-  @notes = Note.where :user_id => session[:user].id if session[:user]
+  @notes = Note.where :user_id => session[:user].id
   haml :notes
 end
 
@@ -50,9 +50,28 @@ get '/notes/create' do
 end
 
 post '/notes/create' do
-  puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> #{params}"
-  note = Note.create(:title => "fucking title")
+  note = Note.new()
+  note.title = params[:title]
+  note.text = params[:text]
+  note.tags = params[:tags]
+  note.notebook = params[:notebook]
+  note.user_id = session[:user].id
   note.save
+  haml :notes
+  redirect '/notes'
+end
+
+get '/note/:note_id' do
+  @note = Note.find :id => params[:note_id]
+  if @note
+    if @note.user_id.eql? session[:user].id
+      haml :note
+    else
+     haml :not_authorized
+    end
+  else
+    redirect '/not_found'
+  end
 end
 
 get '/notebooks' do

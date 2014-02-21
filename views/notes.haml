@@ -1,15 +1,21 @@
 .text-center
-  %h1 Notes
+  %h1.text-info Notes
 
   - if session[:user]
-    %ul
-      - for note in @notes
-        %li
-          %a{ href: "/notes"}
-            = note.title
+    .text-center
+      - if @notes.nil?
+        %p.lead.text-warning You have not created any notes yet.
 
-    .label-info.label
-      %a{ href: "/notes/create"} Create a new note
+      - else
+        %ul
+          - for note in @notes
+            %li
+              %a{href: "/note/#{note.id}"}
+                = note.title
+
+      .btn-sm.btn-default.btn
+        %a{ href: "/notes/create"} Create a new note
+
   - else
     .text-center
       %p.lead.text-warning
