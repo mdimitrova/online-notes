@@ -3,9 +3,24 @@
 
   %p.lead= @note.text
 
-  %p Tags:
+  Tags:
   - for tag in @note.tags
     .label-info.label
-      %a{href: "/tags/#{tag}"}
+      %a{ href: "/tags/#{tag}" }
         = tag
+
+  %p.spacer
+
+  Notebook:
+  - if @note.notebook == ""
+    .label-disabled.label
+      (none)
+  - else
+    .label-info.label
+      %a{ href: "/notebooks/#{@note.notebook}" }
+        = @note.notebook
+
+  %p
+  .btn-lg.btn-default.btn
+    %a{ href: "/note/#{@note.id}/edit" } Edit
 
