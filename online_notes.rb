@@ -41,7 +41,18 @@ post '/register' do
 end
 
 get '/notes' do
+  @notes = Note.where :user_id => session[:user].id if session[:user]
   haml :notes
+end
+
+get '/notes/create' do
+  haml :create
+end
+
+post '/notes/create' do
+  puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> #{params}"
+  note = Note.create(:title => "fucking title")
+  note.save
 end
 
 get '/notebooks' do

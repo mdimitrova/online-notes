@@ -1,5 +1,5 @@
 .text-center
-  %h1 Register page
+  %h1 Register
 
   = if locals[:register_error] #FIXME
     %p.spacer Incorrect register data. Try again
@@ -14,7 +14,7 @@
     .form-group
       %label{ for: "password" } Password:
       %input.form-control{ id: "password", type: "password", name: "password" }
-    .form-group
-      %label{ for: "retypePassword" } Retype password:
-      %input.form-control{ id: "retypePassword", type: "password", name: "retypePassword" }
+    /.form-group
+    /  %label{ for: "retypePassword" } Retype password:
+    /  %input.form-control{ id: "retypePassword", type: "password", name: "retypePassword" }
     %button.btn{ type: "submit" } Register

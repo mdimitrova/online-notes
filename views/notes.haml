@@ -1,2 +1,20 @@
 .text-center
   %h1 Notes
+
+  - if session[:user]
+    %ul
+      - for note in @notes
+        %li
+          %a{ href: "/notes"}
+            = note.title
+
+    .label-info.label
+      %a{ href: "/notes/create"} Create a new note
+  - else
+    .text-center
+      %p.lead.text-warning
+        Please
+        %a{ href: "/login"} login
+        or
+        %a{ href: "/register"} register
+        to proceed
