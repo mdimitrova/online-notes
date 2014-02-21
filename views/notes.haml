@@ -9,7 +9,7 @@
       - else
         %ul
           - for note in @notes
-            %li
+            %li.lead
               %a{href: "/note/#{note.id}"}
                 = note.title
 

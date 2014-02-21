@@ -1,4 +1,11 @@
 .text-center
   %h1.text-success= @note.title
 
-  %p= @note.text
+  %p.lead= @note.text
+
+  %p Tags:
+  - for tag in @note.tags
+    .label-info.label
+      %a{href: "/tags/#{tag}"}
+        = tag
+
