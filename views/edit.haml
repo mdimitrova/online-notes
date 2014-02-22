@@ -1,0 +1,29 @@
+.text-center
+  %h1 Edit note
+
+- if session[:user]
+  .text-center
+    %form.horizontal{ method: "post", role: "form" }
+      .form-group
+        %label{ for: "title" } Title:
+        %input.form-control{ id: "title", type: "text", name: "title", value: @note.title }
+      .form-group
+        %label{ for: "text" } Note:
+        %textarea.form-control{ id: "text", type: "text", name: "text" }
+          = @note.text
+      .form-group
+        %label{ for: "tags" } Tags:
+        %input.form-control{ id: "tags", type: "text", name: "tags", placeholder: "separated with commas", value: @note.tags_list }
+      .form-group
+        %label{ for: "notebook" } Notebook:
+        %input.form-control{ id: "notebook", type: "text", name: "notebook", placeholder: "(optional)", value: @note.notebook }
+      %button.btn.btn-default{ type: "submit" } Submit
+
+- else
+  .text-center
+    %p.lead.text-warning
+      Please
+      %a{ href: "/login"} login
+      or
+      %a{ href: "/register"}register
+      to proceed

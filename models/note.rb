@@ -28,6 +28,10 @@ class Note < Sequel::Model
     tags = self[:tags].split(' ,').to_a
   end
 
+  def tags_list
+    tags = self[:tags]
+  end
+
   def notebook=(input_notebook)
     self[:notebook] = input_notebook
   end

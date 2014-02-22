@@ -74,6 +74,38 @@ get '/note/:note_id' do
   end
 end
 
+get '/note/:note_id/edit' do
+  @note = Note.find :id => params[:note_id]
+  if @note
+    if @note.user_id.eql? session[:user].id
+      haml :edit
+    else
+     haml :not_authorized
+    end
+  else
+    redirect 'not_found'
+  end
+end
+
+post '/note/:note_id/edit' do
+ @note = Note.find :id => params[:note_id]
+  if @note
+    if @note.user_id.eql? session[:user].id
+      @note.title = params[:title]
+      @note.text = params[:text]
+      @note.tags = params[:tags]
+      @note.notebook = params[:notebook]
+      @note.save
+      redirect "/note/#{params[:note_id]}"
+      haml :note
+    else
+     haml :not_authorized
+    end
+  else
+    redirect '/not_found'
+  end
+end
+
 get '/notebooks' do
   haml :notebooks
 end
