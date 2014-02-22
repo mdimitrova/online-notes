@@ -1,2 +1,22 @@
 .text-center
-  %h1 Tags
+  %h1.text-info Tags
+
+  - if session[:user]
+    .text-center
+      - if @tags.empty?
+        %p.lead.text-warning You have not created any tags yet.
+
+      - else
+        - @tags.each do |tag|
+          .label-info.label
+            %a{href: "/tags/#{tag}"}
+              = tag
+
+  - else
+    .text-center
+      %p.lead.text-warning
+        Please
+        %a{ href: "/login"} login
+        or
+        %a{ href: "/register"} register
+        to proceed

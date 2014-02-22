@@ -111,6 +111,14 @@ get '/notebooks' do
 end
 
 get '/tags' do
+  @tags = []
+  all_notes = Note.where :user_id => session[:user].id
+  all_notes.each do |note|
+    @tags << note.tags
+    puts "<<<<<<<<<<<<<<<<<<<<<<<<< #{note.tags}"
+  end
+  @tags.flatten!.uniq!
+  puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< #{@tags}"
   haml :tags
 end
 

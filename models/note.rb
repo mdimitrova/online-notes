@@ -25,7 +25,7 @@ class Note < Sequel::Model
   end
 
   def tags
-    tags = self[:tags].split(' ,').to_a
+    tags = self[:tags].split(',').to_a
   end
 
   def tags_list
