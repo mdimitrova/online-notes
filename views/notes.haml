@@ -3,7 +3,7 @@
 
   - if session[:user]
     .text-center
-      - if @notes.nil?
+      - if @notes.empty?
         %p.lead.text-warning You have not created any notes yet.
 
       - else
