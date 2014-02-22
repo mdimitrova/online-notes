@@ -115,11 +115,14 @@ get '/tags' do
   all_notes = Note.where :user_id => session[:user].id
   all_notes.each do |note|
     @tags << note.tags
-    puts "<<<<<<<<<<<<<<<<<<<<<<<<< #{note.tags}"
   end
   @tags.flatten!.uniq!
-  puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< #{@tags}"
   haml :tags
+end
+
+get '/tags/:tag' do
+  @notes = Note.where :user_id => session[:user].id, :tags => params[:tag]
+  haml :notes, locals: {selected_notes: @notes}
 end
 
 get '/logout' do

@@ -1,9 +1,11 @@
 .text-center
   %h1.text-info Notes
 
+  - @notes = params[:selected_notes] if params[:selected_notes]
+
   - if session[:user]
     .text-center
-      - if @notes.empty?
+      - if @notes and @notes.empty?
         %p.lead.text-warning You have not created any notes yet.
 
       - else
