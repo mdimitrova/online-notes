@@ -4,10 +4,14 @@
   %p.lead= @note.text
 
   Tags:
-  - for tag in @note.tags
-    .label-info.label
-      %a{ href: "/tags/#{tag}" }
-        = tag
+  - if @note.tags.empty?
+    .label-disabled.label
+      (none)
+  - else
+    - for tag in @note.tags
+      .label-info.label
+        %a{ href: "/tags/#{tag}" }
+          = tag
 
   %p.spacer
 

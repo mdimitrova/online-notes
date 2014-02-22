@@ -116,7 +116,8 @@ get '/tags' do
   all_notes.each do |note|
     @tags << note.tags
   end
-  @tags.flatten!.uniq!
+  @tags.flatten!
+  @tags.uniq! unless @tags.nil?
   haml :tags
 end
 
