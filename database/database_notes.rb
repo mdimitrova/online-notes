@@ -1,6 +1,6 @@
 require 'sequel'
 
-DB = Sequel.sqlite "db.sqlite"
+DB = Sequel.sqlite "database/db.sqlite"
 
 DB.create_table? :notes do
   primary_key :id

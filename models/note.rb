@@ -9,7 +9,7 @@ class Note < Sequel::Model
   end
 
   def title
-    title = self[:title]
+    self[:title]
   end
 
   def text=(input_text)
@@ -17,7 +17,7 @@ class Note < Sequel::Model
   end
 
   def text
-    text = self[:text]
+    self[:text]
   end
 
   def tags=(input_tags)
@@ -25,11 +25,11 @@ class Note < Sequel::Model
   end
 
   def tags
-    tags = self[:tags].split(',').to_a
+    self[:tags].split(',').to_a
   end
 
   def tags_list
-    tags = self[:tags]
+    self[:tags]
   end
 
   def notebook=(input_notebook)
@@ -37,6 +37,6 @@ class Note < Sequel::Model
   end
 
   def notebook
-    notebook = self[:notebook]
+    self[:notebook]
   end
 end
