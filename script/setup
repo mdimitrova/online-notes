@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+load "database/database_notes.rb"
+load "database/database_users.rb"
+puts "Database is initiallized"
