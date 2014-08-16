@@ -1,6 +1,6 @@
 desc "Initialize databae"
-task :init_database do
-		ruby "database/database_notes.rb"
-		ruby "database/database_users.rb"
-	  puts "Database is initialized."
+task :setupi do
+  load "database/database_notes.rb"
+  load "database/database_users.rb"
+  puts "Database is initialized."
 end
