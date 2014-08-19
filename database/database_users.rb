@@ -6,5 +6,5 @@ DB.create_table? :users do
   primary_key :id
   String :username, :unique => true
   String :email, :unique => true
-  String :password
+  String :crypted_password
 end
