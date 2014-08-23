@@ -1,7 +1,7 @@
 .text-center
   %h1 Register
 
-  = if locals[:register_error] #FIXME
+  - if locals[:registration_error]
     %p.spacer Incorrect register data. Try again
 
   %form.horizontal{ method: "post", role: "form"}

@@ -5,5 +5,5 @@
     %title= "Online notes"
     %link(href="/css/bootstrap.css" rel="stylesheet" media="screen")
   %body
-    = session[:user] ? (haml :logged_in_navigation, locals: {:username => locals[:username]}) : (haml :logged_out_navigation)
+    = session[:user] ? (haml :logged_in_navigation, locals: {:username => session[:user].username}) : (haml :logged_out_navigation)
     = yield

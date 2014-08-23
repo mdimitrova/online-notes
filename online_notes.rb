@@ -31,14 +31,13 @@ get '/register' do
 end
 
 post '/register' do
-  user = User.create(params)
-  if user.valid? #FIXME
+  user = User.new(params)
+  if user.valid?
     user.save
     session[:user] = user
     redirect "/notes"
   else
-    haml :login
-    redirect '/register'
+    haml :register, locals: {:registration_error => user.errors}
   end
 end
 
